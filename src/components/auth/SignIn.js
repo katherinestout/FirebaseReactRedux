@@ -42,4 +42,4 @@ import React, { Component } from 'react'
   }
 }
 
-export default SignIn
+export default SignIn;
