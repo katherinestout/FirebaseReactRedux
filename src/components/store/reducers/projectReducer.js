@@ -8,7 +8,13 @@ const initState = {
 //^all of these are stored on a project property in state
 
 const projectReducer = (state = initState, action) =>
+
 {
+    //check action type
+    switch(action.type) {
+        case 'CREATE_PROJECT':
+        console.log('created project', action.project)
+    }
     return state
 }
 

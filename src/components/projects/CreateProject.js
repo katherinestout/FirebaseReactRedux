@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {createProject} from '../store/actions/projectActions';
+import {connect} from 'react-redux';
 
  class CreateProject extends Component {
      state = {
@@ -17,7 +19,9 @@ import React, { Component } from 'react'
 //console log the state
      handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
+        this.props.createProject(this.state)
+        //passes it down to bottom and blah blah runs the createProject action and then can add it to data base blah blah
     }
 
   render() {
@@ -42,5 +46,18 @@ import React, { Component } from 'react'
     )
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return{
+    //whatever property we want to add to the props we add to this object
+    //add method createProject
+    createProject:(project) => dispatch(createProject(project))
 
-export default CreateProject;
+//dispatch is calling createProject
+
+    //when we call props.createProject: and pass in a project, it will run the function and
+    //perform a dispatch somehow return the thing in createProject from the create project action
+  //aka we can access createProject because of this! makes it available
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProject);
