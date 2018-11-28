@@ -44,7 +44,7 @@ import React, { Component } from 'react'
       <input type ="text" id="lastName" onChange={this.handleChange}/>
       </div>
       <div className="input-field">
-      <button className="btn pink z-depth-0">Login</button></div>
+      <button className="btn pink z-depth-0">SignUp</button></div>
       </form>
         
       </div>

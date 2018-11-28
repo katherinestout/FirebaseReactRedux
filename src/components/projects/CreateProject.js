@@ -1,19 +1,46 @@
-import React from 'react';
-import {NavLink } from 'react-router-dom';
+import React, { Component } from 'react'
 
+ class CreateProject extends Component {
+     state = {
+       title:"",
+       content:""
 
-const SignedInLinks = () => {
+     }
+//gets the id of whatever input field is being updated
+//and updates state of value of whatever is being updated
+     handleChange = (e) => {
+         this.setState({
+             [e.target.id]: e.target.value
+         })
+     }
+//prevents default action of form being submitted
+//console log the state
+     handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state);
+    }
+
+  render() {
     return (
-        <ul className="right">
-        <li><NavLink to ='/'>New </NavLink></li>
-        <li><NavLink to ='/'>Log Out</NavLink></li>
-        <li><NavLink to ='/' 
-            className='btn btn-floating pink lighten-1'>
-            KS
-            </NavLink></li>
-        </ul>
-        
+      <div className="container">
+      <form onSubmit={this.handleSubmit} className="white">
+      <h5 className = "grey-text text-darken-3">Create a Project</h5>
+      <div className="input-field">
+      <label htmlFor="title">Title</label>
+      <input type ="text" id="title" onChange={this.handleChange}/>
+      </div>
+
+      <div className="input-field">
+      <label htmlFor="content">Project Content</label>
+      <textarea id ="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
+      </div>
+      <div className="input-field">
+
+      <button className="btn pink z-depth-0">Create!</button></div>
+      </form>
+      </div>
     )
+  }
 }
 
-export default SignedInLinks;
+export default CreateProject;
