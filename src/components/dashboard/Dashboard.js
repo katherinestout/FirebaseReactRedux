@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 //connecting to the firebase
 import { firestoreConnect } from 'react-redux-firebase';
 import {compose} from 'redux';
-import { firestore } from 'firebase';
+
 
 class Dashboard extends Component{
     render() {
