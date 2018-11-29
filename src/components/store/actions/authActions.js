@@ -1,15 +1,15 @@
-export const signIn = (credientials) => {
+export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
 //using firebase authentication to sign in with email and password
         firebase.auth().signInWithEmailAndPassword(
-            credientials.email,
+            credentials.email,
             credentials.password
         ).then(() => {
-            dispatch({type: 'LOGIN_SUCESS'
+            dispatch({type: 'LOGIN_SUCESS' });
         }).catch((err) => {
-            dispatch({type: 'LOGIN_ERROR', err})
-        })
-        })
+            dispatch({type: 'LOGIN_ERROR', err});
+        });
+       
     }
 }
