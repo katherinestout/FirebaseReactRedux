@@ -2,6 +2,8 @@ import React from 'react';
 import {Link } from 'react-router-dom';
 import SignedInLinks from './SignedInLinks.js';
 import SignedOutLinks from './SignedOutLinks';
+import {connect} from 'react-redux';
+//import { map } from '@firebase/util';
 
 const Navbar = () => {
     return (
@@ -20,4 +22,11 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    console.log(state);
+    return{
+        auth: state.firebase.auth
+    }
+}
+
+export default connect(mapStateToProps)(Navbar);

@@ -5,6 +5,7 @@ import {combineReducers} from 'redux';
 
 //synchs firestore data with the state
 import { firestoreReducer} from 'redux-firestore';
+import { firebaseReducer } from 'react-redux-firebase';
 
 //auth and project updates information on auth property in state
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     and it is also dependent on what component is active 
     at the time 
     however we need to tell it exactly which data to synch*/
-    firestore: firestoreReducer
+    firestore: firestoreReducer,
+    firebase: firebaseReducer
 });
 
 export default rootReducer;
