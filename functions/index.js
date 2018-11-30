@@ -31,4 +31,23 @@ exports.projectCreated = functions.firestore
         return createNotification(notification);
 });
 
-//2.
+//2. create a trigger that fires when the user is created using the auth service/ signs up
+exports.userJoined = functions.auth.user()
+    .onCreate(user => {
+        //then creates another notification
+            //grab document
+        return admin.firestore().collection('users')
+            .doc(user.uid).get().then(doc => {
+                //now can access data on that document
+                const newUser= doc.data();
+                const notification = {
+                    //getting first name and last name to store on the user
+                    content: 'Joined the party!',
+                    user: `${newUser.firstName} ${newUser.lastName}`,
+                    time: admin.firestore.FieldValue.serverTimestamp()
+                }
+                //calling function...adding it above and log to console
+                return createNotification(notification);
+            });
+
+});

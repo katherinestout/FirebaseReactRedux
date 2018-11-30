@@ -12,7 +12,7 @@ class Dashboard extends Component{
     render() {
         
        // console.log(this.props);
-        const {projects, auth} = this.props;
+        const {projects, auth, notifications} = this.props;
         //if not logged in, redirect
         if(!auth.uid) return  <Redirect to ='/signin'/>
         
@@ -23,7 +23,7 @@ class Dashboard extends Component{
             <ProjectList projects = {projects}/>
             </div>
             <div className="col s12 m5 offset-m1">
-            <Notifications/>
+            <Notifications notifications={notifications}/>
             </div>
             </div>
             </div>
@@ -36,7 +36,8 @@ const mapStateToProps = (state) =>{
     return{
         projects: state.firestore.ordered.projects,
         //tell if user is logged in or not
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
     }
 }
 //now can access it by props.project inside the component above
@@ -48,5 +49,6 @@ export default compose(
     firestoreConnect([
         //tells which collection to connect to
         //whenever the DB is changed it triggers the firestore reducer
-        {collection: 'projects'}
+        {collection: 'projects', orderBy: ['createdAt', 'desc']},
+        {collection: 'notifications', limit: 3, orderBy: ['time', 'desc']}
     ]))(Dashboard);
