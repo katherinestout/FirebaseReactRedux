@@ -23,7 +23,8 @@ import {Redirect} from 'react-router-dom';
         //console.log(this.state);
         this.props.createProject(this.state)
         //passes it down to bottom and blah blah runs the createProject action and then can add it to data base blah blah
-    }
+        this.props.history.push('/');
+      }
 
   render() {
     const {auth} = this.props;

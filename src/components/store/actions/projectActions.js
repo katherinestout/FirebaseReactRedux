@@ -3,13 +3,16 @@ export const createProject = (project) => {
 
         //make a reference to firestore DB
         const firestore = getFirestore();
+
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
         //making it possible to add project objects
         firestore.collection('projects').add({
             ...project,
-            authorFirstName: 'Kat',
-            authorLastName: 'Stout',
+            authorFirstName: profile.firstName,
+            authorLastName: profile.lastName,
             //generates id
-            authorId: 12345,
+            authorId: authorId,
             createdAt: new Date()
             //.then is the callback when the task above is complete
         }).then(() => {
