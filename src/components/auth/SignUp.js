@@ -29,7 +29,7 @@ import {signUp} from './../store/actions/authActions';
     }
 
   render() {
-    const {auth}= this.props;
+    const {auth, authError} = this.props;
      //if logged in, redirect
      if(auth.uid) return  <Redirect to ='/'/>    
 
@@ -55,6 +55,11 @@ import {signUp} from './../store/actions/authActions';
       </div>
       <div className="input-field">
       <button className="btn pink z-depth-0">SignUp</button></div>
+      <div className="red-text center">
+      {authError ? <p>{authError}</p> : null} 
+      </div>
+
+      
       </form>
         
       </div>
@@ -66,7 +71,8 @@ import {signUp} from './../store/actions/authActions';
 
 const mapStateToProps = (state) => {
   return{
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authError: state.auth.authError
 
   }
 }

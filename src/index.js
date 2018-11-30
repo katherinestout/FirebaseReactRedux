@@ -18,18 +18,13 @@ const store = createStore(rootReducer,
         
     //this is how it knows to communicate to the firestore DB
         reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig, {attachAuthIsReady: true})
+        //add enhancer, firestoreforprofile synches profile, userprofile tells what to use
+        reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true})
     ));
-
 
 //the DOM will not render untill firebase auth is ready!    
 store.firebaseAuthIsReady.then(() => {
-
     ReactDOM.render(<Provider store ={store}><App /></Provider>, document.getElementById('root'));
-
-    // If you want your app to work offline and load faster, you can change
-    // unregister() to register() below. Note this comes with some pitfalls.
-    // Learn more about service workers: http://bit.ly/CRA-PWA
     serviceWorker.unregister();
 })
 
